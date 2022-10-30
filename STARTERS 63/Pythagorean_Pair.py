@@ -1,24 +1,18 @@
-# From math import everything
-from math import *
+dp = [False]*200001
+for i in range(500):
+    for j in range(i, 500):
+        if i*i+j*j <= 200000:
+            dp[i*i+j*j] = (i, j)
 
-def countPairs(N) :
-    ans = []
-    for i in range(1, int(sqrt(N)) + 1) :
-        sq = i * i
- 
-        diff = N - sq
-
-        sqrtDiff = int(sqrt(diff))
-
-        if sq  +  (sqrtDiff*sqrtDiff) == N :
-            ans = [i, sqrtDiff]
-            break
-    return ans
 
 for _ in range(int(input())):
+    
     n = int(input())
-    ans = countPairs(n)
-    if ans == []:
-        print(-1)
+    cnt = 1
+    while n%4==0:
+        n //= 4
+        cnt *= 2
+    if dp[n] != False:
+        print(dp[n][0]*cnt, dp[n][1]*cnt)
     else:
-        print(*ans)
+        print(-1)
